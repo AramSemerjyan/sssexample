@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import swift_polis
 
 protocol PolisServiceInterface {
     func getDirectoryLastUpdateDate() -> String
@@ -26,7 +27,7 @@ final class PolisService {
         self.polisRepo = polisRepo
         self.polisFetchService = polisFetchService
         
-        setUp()
+        fetchData()
     }
 }
 
@@ -59,7 +60,7 @@ extension PolisService: PolisServiceInterface {
 // MARK: - Set up 
 
 private extension PolisService {
-    func setUp() {
+    func fetchData() {
         Task {
             let finder = self.polisFetchService.fetchRemoteFinder()
             

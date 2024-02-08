@@ -5,10 +5,10 @@
 //  Created by Aram Semerjyan on 08.02.24.
 //
 
-enum SSSFileType {
-    case facilityDirectories
+enum SSSFileType: String {
+    case directories
     case facilities
-    case facilitiesLocation
+    case location
 }
 
 extension SSSFileType {
@@ -18,17 +18,9 @@ extension SSSFileType {
         }
     }
     
-    var name: String {
-        switch self {
-        case .facilityDirectories: "directories"
-        case .facilities: "facilities"
-        case .facilitiesLocation: "locations"
-        }
-    }
-    
     var nameWithExt: String {
         switch self {
-        default: name + ext
+        default: rawValue + ext
         }
     }
 }

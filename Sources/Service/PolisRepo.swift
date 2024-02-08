@@ -28,11 +28,11 @@ final class PolisRepo {
 
 extension PolisRepo: PolisRepoInterface {
     func save(direcotory: FacilitiesDirectory) {
-        save(data: direcotory, type: .facilityDirectories)
+        save(data: direcotory, type: .directories)
     }
     
     func getDirectory() -> FacilitiesDirectory? {
-        get(fileType: .facilityDirectories)
+        get(fileType: .directories)
     }
     
     func save(facilities: [String : Facility]) {
@@ -46,11 +46,11 @@ extension PolisRepo: PolisRepoInterface {
     }
     
     func save(facilityLocations: [String : FacilityLocation]) {
-        save(data: facilityLocations, type: .facilitiesLocation)
+        save(data: facilityLocations, type: .location)
     }
     
     func getFacilityLocation(forId id: String) -> FacilityLocation? {
-        let facilities: [String: FacilityLocation]? = get(fileType: .facilitiesLocation)
+        let facilities: [String: FacilityLocation]? = get(fileType: .location)
         
         return facilities?[id]
     }

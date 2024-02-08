@@ -23,7 +23,7 @@ protocol PolisFetchServiceInterface {
 }
 
 final class PolisFetchService {
-    let serverUrl = Constants.polisURL
+    private let serverUrl = Constants.polisURL
 }
 
 // MARK: - PolisFetchServiceInterface
@@ -70,7 +70,7 @@ extension PolisFetchService: PolisFetchServiceInterface {
         forId id: String
     ) async -> Facility? {
         guard 
-            let facilityUUID = UUID(uuidString: id),
+            let facilityUUID = id.toUUID,
             let facilityUrl = URL(string: finder.observingFacilityURL(observingFacilityID: facilityUUID))
         else {
             return nil
@@ -94,8 +94,8 @@ extension PolisFetchService: PolisFetchServiceInterface {
         andLocationId locationId: String
     ) async -> FacilityLocation? {
         guard 
-            let facilityUUID = UUID(uuidString: id),
-            let locationUUID = UUID(uuidString: locationId),
+            let facilityUUID = id.toUUID,
+            let locationUUID = locationId.toUUID,
             let locationUrl = URL(
                 string: finder.observingDataURL(
                     withID: locationUUID,
