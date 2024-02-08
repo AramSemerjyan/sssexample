@@ -9,6 +9,10 @@ struct Server: ParsableCommand {
     var polisURL: String?
     @Option
     var jsonFolderDir: String?
+    @Option
+    var host: String?
+    @Option
+    var port: Int?
     
     mutating func run() throws {
         configureArguments()
@@ -19,7 +23,7 @@ struct Server: ParsableCommand {
             router: DI.shared.container.resolve(PolisRouter.self)!
         )
 
-        app.listen(8888)
+        app.listen(Constants.port)
     }
 }
 
@@ -27,11 +31,12 @@ struct Server: ParsableCommand {
 
 private extension Server {
     func configureArguments() {
-        configurePolisUrl()
-        configureFolderDir()
+        configurePolisUrlArgument()
+        configureFolderDirArgument()
+        configureServerArguments()
     }
     
-    func configurePolisUrl() {
+    func configurePolisUrlArgument() {
         guard let polisURL, let url = URL(string: polisURL) else {
             return
         }
@@ -39,9 +44,19 @@ private extension Server {
         Constants.polisURL = url
     }
     
-    func configureFolderDir() {
+    func configureFolderDirArgument() {
         guard let jsonFolderDir else { return }
         
         Constants.jsonFolderDir = jsonFolderDir
+    }
+    
+    func configureServerArguments() {
+        if let host {
+            Constants.host = host
+        }
+        
+        if let port {
+            Constants.port = port
+        }
     }
 }

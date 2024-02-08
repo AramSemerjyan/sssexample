@@ -54,7 +54,7 @@ final class Express {
         
         do {
             let serverChannel = try bootstrap.bind(
-                host: "localhost",
+                host: Constants.host,
                 port: port
             )
             .wait()
