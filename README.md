@@ -3,6 +3,7 @@ Swift server side example
 To start please run this command:
 
 `swift build`
+
 `swift run`
 
 You can configure external url with option `--polis-url`:
